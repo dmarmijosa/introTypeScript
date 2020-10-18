@@ -1,15 +1,19 @@
 "use strict";
 (() => {
-    console.log('Inicio');
-    const prom1 = new Promise((resolve, reject) => {
-        setTimeout(() => {
-            reject('Se termino el timeout');
-        }, 1000);
-    });
-    //then ejecutara cuando todo sale bien
-    //catch si todo sale mal y no para el codigo
-    prom1
-        .then(mensaje => { console.log(mensaje); })
+    //:Promise<tipo-de-dato-retorna>
+    const retirarDinero = (montoRetirar) => {
+        let dineroActual = 1000;
+        return new Promise((res, rej) => {
+            if (montoRetirar > dineroActual) {
+                rej('No hay suficiente dinero');
+            }
+            else {
+                dineroActual -= montoRetirar;
+                res(dineroActual);
+            }
+        });
+    };
+    retirarDinero(500)
+        .then(montoActual => { console.log(`Me queda ${montoActual}`); })
         .catch(err => { console.warn(err); });
-    console.log('Final');
 })();
